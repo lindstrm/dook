@@ -21,24 +21,31 @@
   </p>
 
   <hr>
-  <button @click="count++">
-    count is: {{ count }}
-  </button>
   <p>
     Edit
     <code>renderer/components/Home.vue</code> to test hot module replacement.
   </p>
+  <button @click="increment()">
+    {{ num }}
+  </button>
 </template>
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
+import { mapMutations, useStore } from 'vuex';
+import { key } from '../store';
 
 export default defineComponent({
   name: 'HelloWorld',
   setup() {
-    const count = ref(0);
-
-    return {count};
+    const store = useStore(key);
+    const num = ref(store.state.count);
+    return { num };
+  },
+  methods: {
+    ...mapMutations([
+      'increment',
+    ]),
   },
 });
 </script>
