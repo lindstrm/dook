@@ -29,6 +29,9 @@ let mainWindow: BrowserWindow | null = null;
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     show: false, // Use 'ready-to-show' event to show window
+    frame: false,
+    autoHideMenuBar: true,
+    titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
       preload: join(__dirname, '../../preload/dist/index.cjs'),
       contextIsolation: import.meta.env.MODE !== 'test',   // Spectron tests can't work with contextIsolation: true
